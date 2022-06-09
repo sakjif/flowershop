@@ -1,0 +1,25 @@
+version: "3.9"
+
+services:
+  flowershop:
+    image: postgres
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+  web:
+    build: .
+    command:
+      sh -c "python manage.py makemigrations &&
+      python manage.py migrate &&
+      python manage.py runserver 0.0.0.0:5000"
+    volumes:
+      - .:/code
+    ports:
+      - "5000:5000"
+    depends_on:
+      - flowershop
+    env_file:
+      - .env
