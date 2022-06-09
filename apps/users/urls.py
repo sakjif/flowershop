@@ -30,4 +30,6 @@ urlpatterns = [
     path("login/employee/", LoginEmployeeView.as_view(), name="login_employee"),
     path("login/client/", LoginClientView.as_view(), name="login_client"),
     path("statistic/employee/", EmployeeProfileStatisticView.as_view(), name="employee_statistic"),
+    path("api/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
+
 ]
